@@ -738,7 +738,6 @@ section {
   flex-direction: column;
   justify-content: space-between;
   height: fit-content;
-
 }
 
 .popular .box-container .box .image {
@@ -746,9 +745,12 @@ section {
 }
 
 .popular .box-container .box .image img {
-  height: auto;
-
+  margin: auto;
+  height: 100%;
+  border-radius: 10px;
   width: 100%;
+  object-fit: contain;
+
 }
 
 .popular .box-container .box .content h3 {
