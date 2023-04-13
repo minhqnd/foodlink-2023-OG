@@ -32,8 +32,10 @@ function signin(form) {
     firebase.auth().signInWithEmailAndPassword(form.email.value, form.password.value)
         .then((userCredential) => {
             var user = userCredential.user;
-            console.log(user)
-            location.href = "home.html";
+            if (form.savess.checked) {
+                document.cookie = "sessionId=Logged; max-age=60";
+            }
+            location.href = "menu.html";
         })
         .catch((error) => {
             var errorCode = error.code;
