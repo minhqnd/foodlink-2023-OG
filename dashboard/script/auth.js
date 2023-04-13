@@ -33,7 +33,7 @@ function signin(form) {
         .then((userCredential) => {
             var user = userCredential.user;
             if (form.savess.checked) {
-                document.cookie = "sessionId=Logged; max-age=60";
+                document.cookie = "sessionId=Logged; max-age=86400";
             }
             location.href = "menu.html";
         })
