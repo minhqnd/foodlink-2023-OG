@@ -738,17 +738,22 @@ section {
   flex-direction: column;
   justify-content: space-between;
   height: fit-content;
-
 }
 
 .popular .box-container .box .image {
+  /* height: 50%; */
+  border-radius: 15px;
   margin: 1rem 0;
 }
 
 .popular .box-container .box .image img {
-  height: auto;
-
+  height: 100%;
+  /* margin: 0 auto; */
+  border-radius: 10px;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   width: 100%;
+  object-fit: contain;
+
 }
 
 .popular .box-container .box .content h3 {
