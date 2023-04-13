@@ -33,7 +33,7 @@ function signin(form) {
         .then((userCredential) => {
             var user = userCredential.user;
             console.log(user)
-            // location.href = "home.html";
+            location.href = "home.html";
         })
         .catch((error) => {
             var errorCode = error.code;
