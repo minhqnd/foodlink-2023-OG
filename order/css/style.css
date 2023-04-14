@@ -747,13 +747,11 @@ section {
 }
 
 .popular .box-container .box .image img {
-  height: 100%;
-  /* margin: 0 auto; */
+  height: 15rem;
   border-radius: 10px;
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   width: 100%;
-  object-fit: contain;
-
+  object-fit: cover;
 }
 
 .popular .box-container .box .content h3 {
