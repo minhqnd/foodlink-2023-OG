@@ -45,6 +45,7 @@ firebase.database().ref(`donhang/${id}`).on("value", snapshot => {
         window.open(`../success/index.html?id=${id}`, "_self");
 
     }
+    
     // var div = order
     // var div = div.replaceAll('%DANHSACH%', snapshot.val().danhsach)
     // var div = div.replaceAll('%ID%', snapshot.val().id)

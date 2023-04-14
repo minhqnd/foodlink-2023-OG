@@ -159,8 +159,7 @@ function tongDon(productList) {
 
 function updateCart(productList) {
     $('.listcard').empty()
-    $('.tien').text(tongTien(productList) + '.000')
-    $('.badge').text(tongDon(productList))
+    updatetien(productList)
     productList.forEach(data => {
         var div = listcardtemp
         var div = div.replaceAll('%ANH%', data.image)
@@ -175,17 +174,29 @@ function updateCart(productList) {
 }
 
 var listcardtemp = `<div class="box">
-<i class="fas fa-times"></i>
+<i class="fas fa-times" data-id='%ID%' onclick="deleteCart(this)"></i>
 <img src="%ANH%" loading="lazy" alt="">
 <div class="content">
     <h3>%TENSANPHAM%</h3>
     <span>Số lượng: </span>
-    <input data-id='%ID%' data-price='%PRICE%' type="number" name="" value="%SOLUONG%" id="" min=1 max=10 onChange="themSoLuong(this)">
+    <input data-id='%ID%' data-price='%PRICE%' type="number" name="" value="%SOLUONG%" id="" min=1 onChange="themSoLuong(this)">
     <br>
     <span>Giá: </span>
     <span class="price"> %TOTALPRICE% </span>
 </div>
 </div>`
+
+function deleteCart(data) {
+    var id = $(data).data('id');
+    // Xóa sản phẩm khỏi danh sách sản phẩm
+    for (var i = 0; i < productList.length; i++) {
+        if (productList[i].id === id) {
+            productList.splice(i, 1);
+            break;
+        }
+    }
+    updateCart(productList)
+}
 
 function themSoLuong(input) {
     // Lấy giá trị của input
@@ -208,14 +219,21 @@ function themSoLuong(input) {
 
             // Cập nhật lại giá trị của sản phẩm trên trang
             $(input).siblings(".price").text(total + '.000');
-            $('.tien').text(tongTien(productList) + '.000')
-            $('.badge').text(tongDon(productList))
+            updatetien(productList)
             break;
         }
     }
 }
 
-
+function updatetien(productList) {
+    tien = tongTien(productList) * 1000
+    $('.tien').text(tien.toLocaleString('vi-VN'))
+    vat = tien * 5 / 100
+    $('.vat').text(vat.toLocaleString('vi-VN'))
+    tongtien = tien + vat
+    $('.tongtien').text(tongtien.toLocaleString('vi-VN'))
+    $('.badge').text(tongDon(productList))
+}
 
 function updonhang() {
     // if (checkcan(id)) {
@@ -227,13 +245,14 @@ function updonhang() {
     var id = Math.floor(Math.random() * 90 + 10)
 
     firebase.database().ref(`donhang/${id}`).update({
-        danhsach: danhsach,
-        gia: $('.cart-btn .tien').text(),
+        danhsach: productList.map(item => `(${item.quantity}) ${item.name}`),
+        gia: $('.tongtien').text(),
         trangthai: false,
-        id: id
+        id: id,
+        time: (new Date()).getTime()
     }).then(result => {
         //done
-        // firebase.database().ref(`tongsanpham`).set(firebase.database.ServerValue.increment(1));
+        firebase.database().ref(`donhientai`).set(firebase.database.ServerValue.increment(1));
         console.log('Đăng thành công!')
         window.open(`../pending/index.html?id=${id}`, "_self");
     })
@@ -241,13 +260,14 @@ function updonhang() {
 
 function sendDonHang(id) {
     firebase.database().ref(`donhang/${id}`).update({
-        danhsach: danhsach,
-        gia: $('.cart-btn .tien').text(),
+        danhsach: productList.map(item => `(${item.quantity}) ${item.name}`),
+        gia: $('.tongtien').text(),
         trangthai: false,
-        id: id
+        id: id,
+        time: (new Date()).getTime()
     }).then(result => {
         //done
-        // firebase.database().ref(`tongsanpham`).set(firebase.database.ServerValue.increment(1));
+        firebase.database().ref(`donhientai`).set(firebase.database.ServerValue.increment(1));
         console.log('Đăng thành công!')
         window.open(`../pending/index.html?id=${id}`, "_self");
     })
@@ -266,5 +286,9 @@ function checkcan(id) {
     )
 }
 
-
-
+//onclick function jquery
+$(document).ready(function() {
+    $('.payment-container').click(function() {
+        $('.thanhtoan').removeClass('unactive');
+    })
+    });

@@ -2,21 +2,52 @@ var list = 1
 
 firebase.database().ref("donhang").on("child_added", snapshot => {
     // console.log(snapshot.val());
-    var div = order
-    var div = div.replaceAll('%DANHSACH%', snapshot.val().danhsach)
-    var div = div.replaceAll('%ID%', snapshot.val().id)
-    var div = div.replaceAll('%IDKEY%', snapshot.key)
-    var div = div.replaceAll('%GIA%', snapshot.val().gia)
-    // if (list >= 2) {
+    if (!snapshot.val().trangthai) {
+        var div = order
+        var div = div.replaceAll('%DANHSACH%', snapshot.val().danhsach.join("<br>"))
+        var div = div.replaceAll('%ID%', snapshot.val().id)
+        var div = div.replaceAll('%IDKEY%', snapshot.key)
+        var div = div.replaceAll('%TIME%', snapshot.val().time)
+        var div = div.replaceAll('%GIA%', snapshot.val().gia + '₫')
         $('.listOrder').prepend(div)
-    // }
-    // ++list
+    }
 })
 
-var order = `<div class="col-xl-3">
+$(document).ready(function () {
+    // Lặp qua tất cả các thẻ div có class "badge" và thuộc tính data-time
+
+    setInterval(function () {
+        $(".badge[data-time]").each(function () {
+            var $badge = $(this);
+            // Lấy giá trị của thuộc tính data-time
+            var dataTime = $badge.data("time");
+            // Chuyển đổi giá trị data-time thành đối tượng ngày
+            var date = new Date(parseInt(dataTime));
+            // Tính toán thời gian đã trôi qua từ thời điểm data-time đến hiện tại
+            var timeDiff = new Date() - date;
+            // Cập nhật thời gian theo từng giây
+            timeDiff += 1000;
+            // Hiển thị thời gian đã trôi qua theo định dạng giờ:phút:giây
+            $badge.text(msToTime(timeDiff));
+        }, 1000);
+    });
+
+    // Hàm chuyển đổi miliseconds thành định dạng giờ:phút:giây
+    function msToTime(duration) {
+        var seconds = parseInt((duration / 1000) % 60),
+            minutes = parseInt((duration / (1000 * 60)) % 60);
+        minutes = (minutes < 10) ? "0" + minutes : minutes;
+        seconds = (seconds < 10) ? "0" + seconds : seconds;
+        return minutes + ":" + seconds;
+    }
+});
+
+
+
+var order = `<div class="col-xl-3 removeid%IDKEY%">
 <div class="card text-center">
     <div class="card-body">
-        <h3 class="badge badge-xl light badge-secondary">00:13p</h3>
+        <h3 data-time='%TIME%' class="badge badge-xl light badge-secondary">00:00</h3>
         <h4 class="card-text">%DANHSACH%</h4>
         <p class="card-text text-dark">Lấy tại quầy - %GIA% - %ID%</p>
     </div>
@@ -27,13 +58,12 @@ var order = `<div class="col-xl-3">
 </div>`
 
 function hoanthanh(id) {
-    // console.log($(data).data("idd"));
-    // var id = $(data).data("idd")
     firebase.database().ref(`donhang/${id}`).update({
         trangthai: true
     }).then(result => {
-        //done
-        // firebase.database().ref(`tongsanpham`).set(firebase.database.ServerValue.increment(1));
+        firebase.database().ref(`tongdon`).set(firebase.database.ServerValue.increment(1));
+        firebase.database().ref(`donhientai`).set(firebase.database.ServerValue.increment(-1));
+        $(`.removeid${id}`).remove()
         console.log('Đăng thành công!')
     })
 }
