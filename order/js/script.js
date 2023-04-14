@@ -254,7 +254,27 @@ function updonhang() {
         //done
         firebase.database().ref(`donhientai`).set(firebase.database.ServerValue.increment(1));
         console.log('Đăng thành công!')
-        window.open(`../pending/index.html?id=${id}`, "_self");
+        var pay = $('input[name=payment-type]:checked').val() * 1
+        switch (pay) {
+            case 0:
+                window.open(`../pending/index.html?id=${id}`, "_self");
+                break;
+            case 1:
+                window.open("https://dl.vietqr.io/pay?app=mb");
+
+                // Chuyển đến trang pending khi thanh toán hoàn tất
+                setTimeout(function () {
+                    window.open(`../pending/index.html?id=${id}`, "_self");
+                }, 2000);
+                break;
+            case 2:
+                window.open("https://me.momo.vn/quangminh06");
+
+                // Chuyển đến trang pending khi thanh toán hoàn tất
+                setTimeout(function () {
+                    window.open(`../pending/index.html?id=${id}`, "_self");
+                }, 2000);
+        }
     })
 }
 
@@ -269,7 +289,27 @@ function sendDonHang(id) {
         //done
         firebase.database().ref(`donhientai`).set(firebase.database.ServerValue.increment(1));
         console.log('Đăng thành công!')
-        window.open(`../pending/index.html?id=${id}`, "_self");
+        var pay = $('input[name=payment-type]:checked').val() * 1
+        switch (pay) {
+            case 0:
+                window.open(`../pending/index.html?id=${id}`, "_self");
+                break;
+            case 1:
+                window.open("https://dl.vietqr.io/pay?app=mb");
+
+                // Chuyển đến trang pending khi thanh toán hoàn tất
+                setTimeout(function () {
+                    window.open(`../pending/index.html?id=${id}`, "_self");
+                }, 2000);
+                break;
+            case 2:
+                window.open("https://me.momo.vn/quangminh06");
+
+                // Chuyển đến trang pending khi thanh toán hoàn tất
+                setTimeout(function () {
+                    window.open(`../pending/index.html?id=${id}`, "_self");
+                }, 2000);
+        }
     })
 }
 
@@ -287,8 +327,15 @@ function checkcan(id) {
 }
 
 //onclick function jquery
-$(document).ready(function() {
-    $('.payment-container').click(function() {
+$(document).ready(function () {
+    $('.payment-container').click(function () {
         $('.thanhtoan').removeClass('unactive');
     })
-    });
+});
+
+// window.open("https://dl.vietqr.io/pay?app=mb");
+
+// // Chuyển đến trang pending khi thanh toán hoàn tất
+// setTimeout(function () {
+//     window.location.href = "./pending";
+// }, 5000);

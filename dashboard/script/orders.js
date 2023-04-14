@@ -1,8 +1,11 @@
 var list = 1
-
+let cart = [];
 firebase.database().ref("donhang").on("child_added", snapshot => {
     // console.log(snapshot.val());
     if (!snapshot.val().trangthai) {
+        snapshot.val().danhsach.forEach(element => {
+            cart.push(element)
+        });
         var div = order
         var div = div.replaceAll('%DANHSACH%', snapshot.val().danhsach.join("<br>"))
         var div = div.replaceAll('%ID%', snapshot.val().id)
@@ -11,7 +14,29 @@ firebase.database().ref("donhang").on("child_added", snapshot => {
         var div = div.replaceAll('%GIA%', snapshot.val().gia + '₫')
         $('.listOrder').prepend(div)
     }
+    $('.tonghop').empty()
+    $('.tonghop').text(consolidateOrders(cart))
 })
+
+function consolidateOrders(orders) {
+    const orderMap = new Map();
+    
+    for (let order of orders) {
+      const count = parseInt(order.match(/\d+/)[0]);
+      const name = order.replace(`(${count}) `, "");
+      
+      if (!orderMap.has(name)) {
+        orderMap.set(name, count);
+      } else {
+        orderMap.set(name, orderMap.get(name) + count);
+      }
+    }
+    
+    const consolidatedOrders = Array.from(orderMap, ([name, count]) => `(${count}) ${name}`);
+    
+    return consolidatedOrders;
+  }
+  
 
 $(document).ready(function () {
     // Lặp qua tất cả các thẻ div có class "badge" và thuộc tính data-time
@@ -63,8 +88,26 @@ function hoanthanh(id) {
     }).then(result => {
         firebase.database().ref(`tongdon`).set(firebase.database.ServerValue.increment(1));
         firebase.database().ref(`donhientai`).set(firebase.database.ServerValue.increment(-1));
-        $(`.removeid${id}`).remove()
+        $(`.listOrder`).empty()
+        cart = []
         console.log('Đăng thành công!')
+        firebase.database().ref("donhang").on("child_added", snapshot => {
+            // console.log(snapshot.val());
+            if (!snapshot.val().trangthai) {
+                snapshot.val().danhsach.forEach(element => {
+                    cart.push(element)
+                });
+                var div = order
+                var div = div.replaceAll('%DANHSACH%', snapshot.val().danhsach.join("<br>"))
+                var div = div.replaceAll('%ID%', snapshot.val().id)
+                var div = div.replaceAll('%IDKEY%', snapshot.key)
+                var div = div.replaceAll('%TIME%', snapshot.val().time)
+                var div = div.replaceAll('%GIA%', snapshot.val().gia + '₫')
+                $('.listOrder').prepend(div)
+            }
+            $('.tonghop').empty()
+            $('.tonghop').text(consolidateOrders(cart))
+        })
     })
 }
 
