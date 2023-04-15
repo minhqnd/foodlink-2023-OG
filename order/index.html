@@ -222,6 +222,10 @@
                 <h3 class="subtotal">Thuế VAT 5%: <span class="vat">₫0</span> </h3>
                 <h3 class="total">Tổng: <span class="tongtien">0</span> </h3>
                 <input type="text" placeholder="Mã giảm giá" class="voucher">
+                <input type="text" placeholder="Ghi chú" class="voucher ghichu">
+                <input type="checkbox" name="" id="getlater">
+                <label class="getlater" for="getlater">Lấy đơn vào lúc:</label>
+                <br>
                 <a href="#" class="btn thanhtoan unactive" onclick="updonhang()">Thanh toán</a>
 
             </div>
@@ -256,7 +260,9 @@
                 <span>Chào mừng đến với OrderIt</span>
                 <h3>Khách lẻ  </h3>
                 <p>Hệ thống gọi món tự động, bạn hãy gọi món và bấm vào nút gọi đồ để gọi đồ ăn.</p>
-                <a href="#" class="btn">Gọi món ngay</a>
+                <a href="#popular" style="margin-right: 1rem;" class="btn bigbtn">Gọi món ngay</a><a href="#booking"
+                    class="btn bigbtn">Đặt
+                    bàn</a>
             </div>
 
             <div class="image">
@@ -266,11 +272,12 @@
 
         </section>
 
+
         <!-- home section ends  -->
 
         <!-- category section starts  -->
 
-        <section class="category">
+        <!-- <section class="category">
             <a href="#" class="box">
                 <img src="image/cat-3.png" loading="lazy" alt="">
                 <h3>burger</h3>
@@ -301,7 +308,7 @@
                 <h3>combo</h3>
             </a>
 
-        </section>
+        </section> -->
 
         <!-- category section ends -->
 
@@ -529,7 +536,7 @@
                     <span>double cheese</span>
                     <h3></h3>
                     <p>kèm khoai và cocacola</p>
-                    <a href="#" class="btn">Gọi ngay</a>
+                    <a href="#popular" class="btn">Gọi ngay</a>
                 </div>
             </div>
 
@@ -539,7 +546,7 @@
                     <div class="content">
                         <span>Đặc biệt</span>
                         <h3>Giảm giá tới 20%</h3>
-                        <a href="#" class="btn">Gọi ngay</a>
+                        <a href="#popular" class="btn">Gọi ngay</a>
                     </div>
                 </div>
                 <div class="grid">
@@ -547,7 +554,7 @@
                     <div class="content center">
                         <span>Đặc biệt</span>
                         <h3>Thêm tới 50%</h3>
-                        <a href="#" class="btn">Gọi ngay</a>
+                        <a href="#popular" class="btn">Gọi ngay</a>
                     </div>
                 </div>
                 <div class="grid">
@@ -555,7 +562,7 @@
                     <div class="content">
                         <span>Giới hạn</span>
                         <h3>Hoàn tiền 100%</h3>
-                        <a href="#" class="btn">Gọi ngay</a>
+                        <a href="#popular" class="btn">Gọi ngay</a>
                     </div>
                 </div>
             </div>
@@ -563,7 +570,71 @@
         </section>
 
         <!-- banner section ends -->
-
+        <div class="heading">
+            <span>Booking</span>
+            <h3>Đặt bàn</h3>
+        </div>
+        <div id="booking" class="section">
+            <div class="section-center">
+                <div class="container" style="border-radius: 1rem;">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-1">
+                            <div class="booking-form">
+                                <form action="javascript:booking()" id="booking-form">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group underline">
+                                                <span class="form-label">Tên</span>
+                                                <input class="form-control" type="text" id="name-input">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group underline">
+                                                <span class="form-label">Số điện thoại</span>
+                                                <input class="form-control" type="tel" id="phone-input">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-6">
+                                            <div class="form-group underline">
+                                                <span class="form-label">Số Người</span>
+                                                <select class="form-control" id="num-people-input">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3-5</option>
+                                                    <option>6-12</option>
+                                                </select>
+                                                <span class="select-arrow"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group underline">
+                                                <span class="form-label">Giờ</span>
+                                                <input class="form-control" type="time" required id="time-input">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group underline">
+                                                <span class="form-label">Ngày</span>
+                                                <input class="form-control" type="date" required id="date-input">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-btn">
+                                        <button class="submit-btn" id="submit-btn">Đặt ngay</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- menu section starts  -->
         <!-- 
 <section class="menu" id="menu">
