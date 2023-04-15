@@ -355,11 +355,11 @@ function booking() {
     //     return;
     // }
     var time = convertDateTimeToTimestamp(timeInput + ' - ' + dateInput)
-    sendbook(time,phoneInput,nameInput,guestsInput)
-    
+    sendbook(time, phoneInput, nameInput, guestsInput)
+
 }
 
-function sendbook(time,phone,name,guests) {
+function sendbook(time, phone, name, guests) {
     firebase.database().ref().child('book').push({
         'name': name,
         'phone': phone,
@@ -373,17 +373,31 @@ function convertDateTimeToTimestamp(dateTimeStr) {
     var dateTimeParts = dateTimeStr.split(' - ');
     var datePart = dateTimeParts[1];
     var timePart = dateTimeParts[0];
-    
+
     var dateParts = datePart.split('-');
     var year = parseInt(dateParts[0]);
     var month = parseInt(dateParts[1]) - 1;
     var day = parseInt(dateParts[2]);
-  
+
     var timeParts = timePart.split(':');
     var hours = parseInt(timeParts[0]);
     var minutes = parseInt(timeParts[1]);
-    
+
     var timestamp = new Date(year, month, day, hours, minutes).getTime();
-    
+
     return timestamp;
-  }
+}
+
+function check() {
+    // Get the checkbox
+    var checkBox = document.getElementById("getlater");
+    // Get the output text
+    var text = document.getElementById("timelaydon");
+
+    // If the checkbox is checked, display the output text
+    if (checkBox.checked == true) {
+        text.style.display = "block";
+    } else {
+        text.style.display = "none";
+    }
+}
