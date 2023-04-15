@@ -69,7 +69,7 @@ $(document).ready(function () {
 
 
 
-var order = `<div class="col-xl-5 removeid%IDKEY%">
+var order = `<div class="col-xl-3 removeid%IDKEY%">
 <div class="card text-center">
     <div class="card-body">
         <h3 data-time='%TIME%' class="badge badge-xl light badge-secondary">00:00</h3>
