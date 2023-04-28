@@ -110,5 +110,3 @@ function hoanthanh(id) {
         })
     })
 }
-
-
