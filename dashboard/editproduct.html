@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>FoodLink</title>
+	<!-- Favicon icon -->
+	<link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
+	<link href="./vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+	<link href="./css/style.css" rel="stylesheet">
+	<link href="./css/custom.css" rel="stylesheet">
+
+</head>
+
+<body>
+	<div class="container-fluid">
+		<div class=" ">
+			<div class="">
+				<div class="row align-items-center pt-md-5 mt-md-5 mb-5">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-title text-center mt-3">
+								<h3>Sửa sản phẩm</h3>
+							</div>
+							<div class="card-body">
+								<form action="javascript:upsanpham()">
+									<div class="form-group">
+										<label for="productname">Tên sản phẩm:</label>
+										<input type="text" class="form-control" id="tensanpham"
+											placeholder="Nhập Tên sản phẩm" required>
+										<div class="invalid-feedback">Tên sản phẩm không thể để trống</div>
+									</div>
+									<div class="form-group">
+										<label for="productid">ID Sản phẩm:</label>
+										<input type="text" class="form-control" id="idsanpham"
+											placeholder="Nhập ID Sản phẩm" required>
+										<div class="invalid-feedback">ID Sản phẩm không thể để trống</div>
+									</div>
+									<div class="form-group">
+										<label for="trangthai">Trạng thái Sản phẩm:</label>
+										<input type="checkbox" class="" id="trangthai">
+										<!-- <div class="invalid-feedback">ID Sản phẩm không thể để trống</div> -->
+									</div>
+									<div class="form-group">
+										<label for="productprice">Giá sản phẩm:</label>
+										<input type="text" class="form-control" id="gia"
+											placeholder="Nhập Giá sản phẩm. Định dạng xx.000" required>
+										<div class="invalid-feedback">Giá sản phẩm không thể để trống</div>
+
+									</div>
+									<p>Ảnh sản phẩm:</p>
+									<div class="custom-file">
+
+										<input id="uploadthumb" type="file" class="custom-file-input" id="productimage" required>
+										<label class="custom-file-label" for="productimage">Chọn file</label>
+										<div id="ok"></div>
+										<img id="imgthumb" src="" alt="thumb" style="height: 0px;">
+									</div>
+									<div class="row align-items-center">
+										<a class="mt-5 mx-auto" href="./panel.html"><button class="btn btn-dark" >Quay về</button></a>
+										<a class="mt-5 mx-auto" href=""><button class="btn btn-dark" type="submit">Lưu</button></a>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--**********************************
+            Content body end
+        ***********************************-->
+	</div>
+	<!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+	<!--**********************************
+        Scripts
+    ***********************************-->
+	<!-- Required vendors -->
+	<script src="./vendor/global/global.min.js"></script>
+	<script src="./vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+	<script src="./vendor/chart.js/Chart.bundle.min.js"></script>
+	<script src="./js/custom.min.js"></script>
+	<script src="./js/deznav-init.js"></script>
+	<!-- Apex Chart -->
+	<script src="./vendor/apexchart/apexchart.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+	<!-- <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-auth.js"></script> -->
+	<script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-database.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-storage.js"></script>
+	<script src="../static/script/data.js"></script>
+	<script src="./script/editproduct.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>
