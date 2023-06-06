@@ -72,12 +72,13 @@ templateFalse = `<div id='%ID%' class="products-row">
 </div>`
 
 function render(data, id) {
-  // console.log(data.tensanpham)
-  if (data.trangthai != undefined & data.trangthai != "true" ) {
-    var div = templateFalse
-  } else {
-    var div = template
-  }
+  console.log(data.trangthai)
+  var div = template
+  if (data.trangthai != undefined) {
+    if (!data.trangthai) {
+      var div = templateFalse
+    }
+  } 
   var div = div.replaceAll('%ANH%', data.anh)
   var div = div.replaceAll('%GIA%', data.gia)
   var div = div.replaceAll('%ID%', id)
