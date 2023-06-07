@@ -89,8 +89,27 @@ var template = `<div class="box">
 </div>
 </div>`
 
+var templateFalse = `<div class="box">
+<a href="#" class="fas fa-heart"></a>
+<div class="image">
+    <img src="%ANH%" loading="lazy" alt="">
+</div>
+<div class="content">
+    <h3>%TENSANPHAM%</h3>
+    <div class="price">%GIA%<span>%UPGIA%</span></div>
+    <a data-id='%ID%' data-tensanpham='%TENSANPHAM%' data-anh='%ANH%' data-gia='%GIA%' onclick="alert('Tạm hết')" class="btn unactive">Thêm</a>
+</div>
+</div>`
+
 function render(data, id) {
     // console.log(data.tensanpham)
+    console.log(data.trangthai)
+    var div = template
+    if (data.trangthai != undefined) {
+      if (!data.trangthai) {
+        var div = templateFalse
+      }
+    } 
     var div = template
     var div = div.replaceAll('%ANH%', data.anh)
     var div = div.replaceAll('%GIA%', data.gia)
