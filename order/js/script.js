@@ -264,6 +264,7 @@ function updonhang() {
     var id = Math.floor(Math.random() * 90 + 10)
 
     firebase.database().ref(`donhang/${id}`).set({
+        danhsach_id: productList.map(item => item.id),
         danhsach: productList.map(item => `(${item.quantity}) ${item.name}`),
         gia: $('.tongtien').text(),
         trangthai: false,
@@ -299,6 +300,7 @@ function updonhang() {
 
 function sendDonHang(id) {
     firebase.database().ref(`donhang/${id}`).set({
+        danhsach_id: productList.map(item => item.id),
         danhsach: productList.map(item => `(${item.quantity}) ${item.name}`),
         gia: $('.tongtien').text(),
         trangthai: false,
